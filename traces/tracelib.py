@@ -8,7 +8,7 @@ import plotly.graph_objects as go
 
 def plot_trace_line(df, pollutant = "nox", zoom = 16, height = 500):
     center = df.mean()
-    color = pd.qcut(df[pollutant], 4)
+    color = pd.qcut(df[pollutant], 4, duplicates='drop')
     
     fig = px.line_mapbox(df, lat="lat", lon="lon", zoom=3, height=height)
     fig.update_layout(mapbox_style="stamen-terrain", mapbox_zoom=zoom, mapbox_center_lat = center.lat, mapbox_center_lon = center.lon,
