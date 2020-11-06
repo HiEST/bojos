@@ -193,6 +193,8 @@ def calculateSpeedAccPandas(df):
         timeDiff[i] = (df.iloc[i]['ts'] - df.iloc[i-1]['ts']).total_seconds()
         speed[i] = calculateSpeed(df.iloc[i], df.iloc[i-1], timeDiff[i])
     acc = calculateAcc(timeDiff, speed)
-    return(pd.DataFrame({'id':list(range(0,len(df))),'speed': speed, 'acc': acc, 'timeDiff': timeDiff}))
-
-
+    return(pd.DataFrame(
+                        {'id':list(range(0,len(df))),'speed': speed,
+                        'acc': acc, 'timeDiff': timeDiff}
+                       )
+          )
