@@ -102,7 +102,8 @@ def computeEmissions(ship, speed, time):
 
     speedDiff = np.diff(s, n=1)
     timeDiff =  np.diff(t, n=1)
-    timeDiff = [ int(t)/pow(10,9) for t in timeDiff ]
+    #timeDiff = [ int(t)/pow(10,9) for t in timeDiff ]
+    timeDiff = [ t.total_seconds() for t in timeDiff ]
     #COEF = calcCOEmissionFactor(speed, prevSpeed, timeDiff)
     COEF = np.array([ calcCOEmissionFactor(s, t) for s,t in zip(speedDiff, timeDiff) ])
 
@@ -194,7 +195,8 @@ def calculateSpeedAccPandas(df):
         speed[i] = calculateSpeed(df.iloc[i], df.iloc[i-1], timeDiff[i])
     acc = calculateAcc(timeDiff, speed)
     return(pd.DataFrame(
-                        {'id':list(range(0,len(df))),'speed': speed,
-                        'acc': acc, 'timeDiff': timeDiff}
+                        {'id': list(range(0, len(df))), 'speed': speed,
+                         'acc': acc, 'timeDiff': timeDiff
+                        }
                        )
           )
