@@ -103,7 +103,7 @@ def computeEmissions(ship, speed, time):
     speedDiff = np.diff(s, n=1)
     timeDiff =  np.diff(t, n=1)
     #timeDiff = [ int(t)/pow(10,9) for t in timeDiff ]
-    timeDiff = [ t.total_seconds() for t in timeDiff ]
+    timeDiff = [ max(1, int(t.total_seconds())) for t in timeDiff ]
     #COEF = calcCOEmissionFactor(speed, prevSpeed, timeDiff)
     COEF = np.array([ calcCOEmissionFactor(s, t) for s,t in zip(speedDiff, timeDiff) ])
 
