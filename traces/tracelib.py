@@ -11,7 +11,7 @@ def plot_trace_line(df, pollutant = "nox", zoom = 16, height = 500):
     color = pd.qcut(df[pollutant], 4, duplicates='drop')
     
     fig = px.line_mapbox(df, lat="lat", lon="lon", zoom=3, height=height)
-    fig.update_layout(mapbox_style="stamen-terrain", mapbox_zoom=zoom, mapbox_center_lat = center.lat, mapbox_center_lon = center.lon,
+    fig.update_layout(mapbox_style="open-street-map", mapbox_zoom=zoom, mapbox_center_lat = center.lat, mapbox_center_lon = center.lon,
         margin={"r":0,"t":0,"l":0,"b":0})
 
     fig.show()
@@ -19,7 +19,7 @@ def plot_trace_line(df, pollutant = "nox", zoom = 16, height = 500):
 def plot_trace(df, pollutant = "nox", zoom = 16, height = 500):
     center = df.mean()
     fig = go.Figure(go.Densitymapbox(lat=df.lat, lon=df.lon, z=df[pollutant], radius=10))
-    fig.update_layout(mapbox_style="stamen-terrain", mapbox_zoom=zoom, mapbox_center_lat = center.lat, mapbox_center_lon = center.lon,
+    fig.update_layout(mapbox_style="open-street-map", mapbox_zoom=zoom, mapbox_center_lat = center.lat, mapbox_center_lon = center.lon,
         margin={"r":0,"t":0,"l":0,"b":0})
     fig.show()
 
