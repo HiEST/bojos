@@ -7,6 +7,7 @@ import plotly.graph_objects as go
 
 
 def plot_trace_line(df, pollutant = "nox", zoom = 16, height = 500):
+    df = df.loc[:, df.columns!='timestamp']
     center = df.mean()
     color = pd.qcut(df[pollutant], 4, duplicates='drop')
     
@@ -17,6 +18,7 @@ def plot_trace_line(df, pollutant = "nox", zoom = 16, height = 500):
     fig.show()
 
 def plot_trace(df, pollutant = "nox", zoom = 16, height = 500):
+    df = df.loc[:, df.columns!='timestamp']
     center = df.mean()
     fig = go.Figure(go.Densitymapbox(lat=df.lat, lon=df.lon, z=df[pollutant], radius=10))
     fig.update_layout(mapbox_style="open-street-map", mapbox_zoom=zoom, mapbox_center_lat = center.lat, mapbox_center_lon = center.lon,
@@ -25,6 +27,7 @@ def plot_trace(df, pollutant = "nox", zoom = 16, height = 500):
 
 
 def plot_line(df, x, y, title=""):
+    df = df.loc[:, df.columns!='timestamp']
     fig = px.line(df, x=x, y=y, title=title)
     fig.show()
 
