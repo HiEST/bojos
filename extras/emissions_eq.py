@@ -166,8 +166,10 @@ def calculateSpeed(coords, prevCoords, timeDiff, speedMultiplier=2):
     # Dot product
     dot = (x1 * x2 + y1 * y2 + z1 * z2)
     cosTheta = dot / (earthR * earthR)
-    if (cosTheta > 1) cosTheta = 1
-    else if (cosTheta < 0) cosTheta = 0
+    if (cosTheta > 1):
+        cosTheta = 1
+    elif (cosTheta < 0):
+        cosTheta = 0
 
     theta = math.acos(cosTheta)
 
