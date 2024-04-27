@@ -166,6 +166,8 @@ def calculateSpeed(coords, prevCoords, timeDiff, speedMultiplier=2):
     # Dot product
     dot = (x1 * x2 + y1 * y2 + z1 * z2)
     cosTheta = dot / (earthR * earthR)
+    if (cosTheta > 1) cosTheta = 1
+    else if (cosTheta < 0) cosTheta = 0
 
     theta = math.acos(cosTheta)
 
@@ -191,7 +193,7 @@ def calculateSpeedAccPandas(df):
     speed = np.zeros(len(df))
     timeDiff = np.zeros(len(df))
     for i in range(1, len(df)):
-        timeDiff[i] = (df.iloc[i]['ts'] - df.iloc[i-1]['ts']).total_seconds()
+        timeDiff[i] = (df.iloc[i]['timestamp'] - df.iloc[i-1]['timestamp']).total_seconds()
         speed[i] = calculateSpeed(df.iloc[i], df.iloc[i-1], timeDiff[i])
     acc = calculateAcc(timeDiff, speed)
     return(pd.DataFrame(
